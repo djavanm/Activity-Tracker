@@ -1,14 +1,13 @@
 if (typeof require !== 'undefined') {
-const userData = require("../data/users")
-const UserRepository = require("./user-repository");
+  const userData = require("../data/users")
+  const UserRepository = require("./user-repository");
 }
 
-
 class Activity {
-    constructor(data, id) {
-      this.data = data.filter(user => user.userID === id);
-      this.id = id;
-    }
+  constructor(data, id) {
+    this.data = data.filter(user => user.userID === id);
+    this.id = id;
+  }
 
   returnDailyMiles(date) {
     let userRepo = new UserRepository(userData);
@@ -18,7 +17,7 @@ class Activity {
   }
 
   returnDay(date) {
-     return this.data.find(day => day.date === date);
+    return this.data.find(day => day.date === date);
   }
 
   returnDailyMinutesActive(date) {
@@ -28,9 +27,9 @@ class Activity {
 
   returnWeeklyAvgActivity(date) {
     let dayIndex = this.data.findIndex(day => day.date === date)
-    let currentWeek = this.data.slice(dayIndex-6, dayIndex+1);
+    let currentWeek = this.data.slice(dayIndex - 6, dayIndex + 1);
     return parseInt(currentWeek.reduce((acc, day) => {
-    return acc += day.minutesActive;
+      return acc += day.minutesActive;
     }, 0) / currentWeek.length)
   }
 
@@ -38,9 +37,9 @@ class Activity {
 
   returnWeeklySteps(date) {
     let dayIndex = this.data.findIndex(day => day.date === date)
-    let currentWeek = this.data.slice(dayIndex-6, dayIndex+1);
+    let currentWeek = this.data.slice(dayIndex - 6, dayIndex + 1);
     return parseInt(currentWeek.reduce((acc, day) => {
-    return acc += day.numSteps;
+      return acc += day.numSteps;
     }, 0))
   }
 
@@ -54,27 +53,27 @@ class Activity {
     let userRepo = new UserRepository(userData);
     let stepGoal = userRepo.returnUser(1).dailyStepGoal;
     return this.data.reduce((acc, day) => {
-    if(day.numSteps >= stepGoal) {
+      if (day.numSteps >= stepGoal) {
         acc.push(day)
-    }
-    return acc;
-}, [])
+      }
+      return acc;
+    }, [])
   }
 
   returnHighestStairClimb() {
     return this.data.reduce((acc, day) => {
       if (day.flightsOfStairs > acc) {
-          acc = day.flightsOfStairs
-      };
-    return acc;
-    },0)
+        acc = day.flightsOfStairs
+      }
+      return acc;
+    }, 0)
   }
 
   returnEmpireCount() {
     let totalFlights = this.data.reduce((acc, day) => {
       acc += day.flightsOfStairs
       return acc;
-    },0)
+    }, 0)
     return parseFloat((totalFlights / 102).toFixed(1))
   }
   returnWeekInfo() {
@@ -83,28 +82,29 @@ class Activity {
 
   returnIncreasedStepDays() {
     return this.data.reduce((acc, day, i, array) => {
-      if(i !== 0 && i !== array.length-1) {
-        if(day.numSteps > array[i-1].numSteps && day.numSteps < array[i+1].numSteps) {
-          acc.push(array[i+1])
+      if (i !== 0 && i !== array.length - 1) {
+        if (day.numSteps > array[i - 1].numSteps && day.numSteps < array[i + 1].numSteps) {
+          acc.push(array[i + 1])
         }
       }
       return acc;
     }, [])
-  };
+  }
 
   returnIncreasedStairDays() {
     return this.data.reduce((acc, day, i, array) => {
-      if(i !== 0 && i !== array.length-1) {
-        if(day.flightsOfStairs > array[i-1].flightsOfStairs && day.flightsOfStairs < array[i+1].flightsOfStairs) {
-          acc.push(array[i+1])
+      if (i !== 0 && i !== array.length - 1) {
+        if (day.flightsOfStairs > array[i - 1].flightsOfStairs && day.flightsOfStairs < array[i + 1].flightsOfStairs) {
+          acc.push(array[i + 1])
         }
       }
       return acc;
     }, [])
-  };
+  }
 
-};
+}
+
 if (typeof module !== 'undefined') {
-    module.exports = Activity;
+  module.exports = Activity;
 }
 
