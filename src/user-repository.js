@@ -1,7 +1,6 @@
 class UserRepository {
   constructor(data) {
     this.data = data;
-    
   }
 
   returnUser(id) {
@@ -16,5 +15,5 @@ class UserRepository {
 }
 
 if (typeof module !== 'undefined') {
-    module.exports = UserRepository;
+  module.exports = UserRepository;
 }
