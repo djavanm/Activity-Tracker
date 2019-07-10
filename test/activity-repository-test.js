@@ -31,7 +31,7 @@ describe('ActivityRepository', function() {
 
   it('should return overall average active minutes for a given date', function() {
     expect(activityRepository.returnAvgMins('2019/06/23')).to.equal(180)
-});
+  });
 
   it('should return the miles a user has walked in a day, based on their steps and stride length', function() {
     expect(activityRepository.returnTopStepper('2019/06/23')).to.deep.equal({userID: 1, date: '2019/06/23', numSteps: 13928, minutesActive: 218, flightsOfStairs: 21 })
