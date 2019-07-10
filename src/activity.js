@@ -76,26 +76,31 @@ class Activity {
     }, 0)
     return parseFloat((totalFlights / 102).toFixed(1))
   }
-  returnWeekInfo() {
-    return this.data.filter(user => user.userID === this.id).slice(-7)
-  } 
+  returnWeekInfo(date) {
+    let index = this.data.findIndex(day => day.date === date);
+    return this.data.slice(index-6, index+1)
+  }
 
-  returnIncreasedStepDays() {
-    return this.data.reduce((acc, day, i, array) => {
-      if (i !== 0 && i !== array.length - 1) {
-        if (day.numSteps > array[i - 1].numSteps && day.numSteps < array[i + 1].numSteps) {
-          acc.push(array[i + 1])
+  returnIncreasedStepDays(date) {
+    let index = this.data.findIndex(day => day.date === date);
+    let currentData = this.data.slice(0, index+1);
+    return currentData.reduce((acc, day, i, array) => {
+      if(i !== 0 && i !== array.length-1) {
+        if(day.numSteps > array[i-1].numSteps && day.numSteps < array[i+1].numSteps) {
+          acc.push(array[i+1])
         }
       }
       return acc;
     }, [])
   }
 
-  returnIncreasedStairDays() {
-    return this.data.reduce((acc, day, i, array) => {
-      if (i !== 0 && i !== array.length - 1) {
-        if (day.flightsOfStairs > array[i - 1].flightsOfStairs && day.flightsOfStairs < array[i + 1].flightsOfStairs) {
-          acc.push(array[i + 1])
+  returnIncreasedStairDays(date) {
+    let index = this.data.findIndex(day => day.date === date);
+    let currentData = this.data.slice(0, index+1);
+    return currentData.reduce((acc, day, i, array) => {
+      if(i !== 0 && i !== array.length-1) {
+        if(day.flightsOfStairs > array[i-1].flightsOfStairs && day.flightsOfStairs < array[i+1].flightsOfStairs) {
+          acc.push(array[i+1])
         }
       }
       return acc;
