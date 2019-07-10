@@ -1,252 +1,261 @@
 body {
-    font-family: 'Open Sans', sans-serif;
-    height: 90vh;
-    width: 100%;
-    /* max-width: 90vw; */
-    margin: auto;
-    display: grid;
-    background: #b0b0b0;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-row-gap: 20px;
-    grid-template-areas:
-    "header header header header"
-    "body body body body"
-
+  background: #b0b0b0;
+  display: grid;
+  font-family: 'Open Sans', sans-serif;
+  grid-row-gap: 20px;
+  grid-template-areas:
+  "header"
+  "body";
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  height: 90vh;
+  margin: auto;
+  width: 100%;
 }
 
 h1 {
-    font-size: 40px;
-    margin: 5px auto 5px auto;
-    color: #000000;
-    font-family: 'Montserrat', sans-serif;
+  color: #000000;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 40px;
+  margin: 5px auto 5px auto;
 }
 
-/* clear fix */
-.grid:after {
-    content: '';
-    display: block;
-    clear: both;
-  }
+h2 {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
 
 header {
-    grid-area: header;
-    background-color: #6a6a6a;
-    height: 50px;
-    width: 100vw;
-    text-align: center;
-    /* border-radius: 10px; */
-    /* box-shadow: 5px 5px 2.5px grey; */
-    margin: 0px 0 5px -20px;
+  background-color: #6a6a6a;
+  grid-area: header;
+  height: 50px;
+  margin: 0px 0 5px -20px;
+  text-align: center;
+  width: 100vw;
 }
 
 main {
-    display: grid;
-    background: #b0b0b0;
-    grid-area: body;
-    width: 90%;
-    margin: 0 auto;
-    justify-self: center;
-    justify-items: center;
-    grid-template-columns: 20% 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-row-gap: 20px;
-    grid-column-gap: 20px;
-    grid-template-areas: 
-    "friends activity"
-    "friends activity"
-    
+  background: #b0b0b0;
+  display: grid;
+  grid-area: body;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  grid-template-areas: 
+  "friends activity"
+  "friends activity";
+  grid-template-columns: 20% 1fr;
+  grid-template-rows: 1fr 1fr;
+  justify-items: center;
+  justify-self: center;
+  margin: 0 auto;
+  width: 90%;
 }
 
 .main__section--friends {
-    grid-area: friends;
-    width: 100%;
-    height: 500px;
+  grid-area: friends;
+  height: 500px;
+  width: 100%;
 }
 
 .main__section--activity {
-    grid-area: activity;
-    width: 100%;
+  grid-area: activity;
+  width: 100%;
 }
 
-.main__section--activity h2 {
-    height: 30px;
+/* Packery and Draggabilly Classes */
+
+/* clear fix */
+.grid:after {
+  clear: both;
+  content: '';
+  display: block;
 }
 
 .grid {
-    background: #b0b0b0;
-    max-width: 100%;
-  }
+  background: #b0b0b0;
+  max-width: 100%;
+}
 
 .grid-item {
-    float: left;
-    width: 180px;
-    height: 180px;
-    background-color: #272727;
-    color: white;
-    border-radius: 10px;
-    box-shadow: 5px 5px 2.5px grey;
-    /* border: 2px solid hsla(0, 0%, 0%, 0.5); */
-  }
+  background-color: #272727;
+  border-radius: 10px;
+  box-shadow: 5px 5px 2.5px grey;
+  color: white;
+  float: left;
+  height: 180px;
+  width: 180px;
+}
 
-.grid-item--width2 { width: 380px; }
-.grid-item--height2 { height: 380px; }
-.grid-item--height3 { height: 580px;}
+.grid-item--width2 { 
+  width: 380px; 
+}
+
+.grid-item--height2 { 
+  height: 380px; 
+}
+
+.grid-item--height3 {
+  height: 580px;
+}
 
 .grid-item:hover {
-border-color: hsla(0, 0%, 100%, 0.5);
-cursor: move;
+  border-color: hsla(0, 0%, 100%, 0.5);
+  cursor: move;
 }
 
 .grid-item.is-dragging,
 .grid-item.is-positioning-post-drag {
-background: rgb(157, 157, 157);
-z-index: 2;
+    background: rgb(157, 157, 157);
+    z-index: 2;
 }
 
 .packery-drop-placeholder {
-outline: 3px dashed hsla(0, 0%, 0%, 0.5);
-outline-offset: -6px;
--webkit-transition: -webkit-transform 0.2s;
-        transition: transform 0.2s;
+  outline: 3px dashed hsla(0, 0%, 0%, 0.5);
+  outline-offset: -6px;
+  -webkit-transition: -webkit-transform 0.2s;
+          transition: transform 0.2s;
 }
 
 .grid-item.is-pointer-down {
-background: rgb(157, 157, 157);
-z-index: 2; /* above other draggies */
+  background: rgb(157, 157, 157);
+  z-index: 2;
 }
 
 .grid-item.is-dragging { 
-    opacity: 0.7; 
+  opacity: 0.7; 
 }
+
+/* Widget Styling */
 
 .icon {
-    height: 30%;
-    width: 30%;
-    display: block;
-    padding: 10px;
-    margin: 0px auto 30px auto;
-}
-
-.main__section--activity--world img {
-    width: 25%;
-    height: 25%;
+  display: block;
+  height: 30%;
+  margin: 0px auto 30px auto;
+  padding: 10px;
+  width: 30%;
 }
 
 h4 {
-    font-weight: bold;
-    padding: 10px 0 10px 0;
-    text-transform: uppercase;
+  font-weight: bold;
+  padding: 10px 0 10px 0;
+  text-transform: uppercase;
 }
 
 article span {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 article p {
-    margin: -8px 10px 5px 10px;
-    display: block;
-    font-size: 18px;
+  display: block;
+  font-size: 18px;
+  margin: -8px 10px 5px 10px;
 }
 
-.main__section--activity--empire img {
-    height: 95%;
-    width: 95%;
-    margin: -70px auto -70px auto;
+article {
+  background-color: #272727;
+  border-radius: 10px;
+  box-shadow: 5px 5px 2.5px grey;
+  color: white;
+  padding: 5px;
+  text-align: center;
+}
+
+/* Friends Section Styles */
+
+.main__section--friends--challenge li {
+  font-size: 20px;
+  margin: 5px 0px 50px 40px;
+  min-width: 170px;
+}
+
+.main__section--friends h4 {
+  margin: 0px auto 30px auto;
+}
+
+.main__section--friends--user {
+  height: auto;
+  margin: 0px auto 20px auto;
+  min-width: 170px;
+}
+
+.main__section--friends--user span:first {
+  font-size:30px;
+  margin: 20px auto 20px auto;
+}
+
+.main__section--friends--user li,
+.main__section--friends--user li span{
+  display: block;
+  font-size: 12px;
+  margin: 10px auto 10px auto;
+}
+
+.main__section--friends--challenge {
+  list-style-type: decimal;
+}
+
+/* Hydration Styles */
+
+div.main__section--hydration--week {
+  margin: 50px auto 0 auto;
+}
+
+.main__section--hydration--today .icon {
+  display: inline;
+  height: 30px;
+  margin: 5px -15px 5px -15px;
+  width: 30px;
+}
+
+/* Sleep Styles */
+
+.main__section--sleep--worst img {
+  float: left;
+  margin: 0;
+}   
+
+.main__section--sleep--worst h4 {
+  margin-bottom: 20px;
+  text-transform: capitalize;
+}
+
+.main__section--sleep--averages img,
+.main__section--sleep--last-night img {
+  margin: 0px auto 10px;
+}
+
+.main__section--sleep--week div {
+  margin: 10px 5px 10px 5px;
+  height: 180px;
+}
+
+/* Activity Styles */
+.main__section--activity--world img {
+  height: 25%;
+  width: 25%;
+}
+
+div.main__section--activity--week {
+  height: 180px;
+  margin: 50px auto 0 auto;
 }
 
 table {
-margin: 30px auto 10px auto;
+  margin: 30px auto 10px auto;
 }
 
 th {
-padding: 0.5em;
-border-bottom: 2px solid #FFE400;
+  border-bottom: 2px solid #FFE400;
+  padding: 0.5em;
 }
 
 td {
 padding: 0.5em;
 }
 
-.main__section--sleep--week div {
-    margin: 10px 5px 10px 5px;
-    height: 180px;
-}
-
-div.main__section--activity--week {
-    margin: 50px auto 0 auto;
-    height: 180px;
-}
-
-div.main__section--hydration--week {
-    margin: 50px auto 0 auto;
-}
-
-.main__section--sleep--worst img {
-    float: left;
-    margin: 0;
-}   
-
-.main__section--sleep--worst h4 {
-    text-transform: capitalize;
-    margin-bottom: 20px;
-}
-
-.main__section--sleep--averages img,
-.main__section--sleep--last-night img {
-    margin: 0px auto 10px;
-}
-
-.main__section--friends--challenge {
-    list-style-type: decimal;
-}
-
-article {
-    text-align: center;
-    padding: 5px;
-    background-color: #272727;
-    color: white;
-    border-radius: 10px;
-    box-shadow: 5px 5px 2.5px grey;
-}
-
-.main__section--friends--challenge li {
-    margin: 5px 0px 50px 40px;
-    font-size: 20px;
-    min-width: 170px;
-}
-
-.main__section--friends h4 {
-    margin: 0px auto 30px auto;
-}
-
-.main__section--friends--user {
-    height: auto;
-    min-width: 170px;
-    margin: 0px auto 20px auto;
-}
-
-.main__section--friends--user span:first {
-    margin: 20px auto 20px auto;
-    font-size:30px;
-}
-
-.main__section--friends--user li,
-.main__section--friends--user li span{
-    margin: 10px auto 10px auto;
-    display: block;
-    font-size: 12px;
-}
-
-h2 {
-    font-size: 30px;
-    margin-bottom: 20px;
-}
-
-.main__section--hydration--today .icon {
-    margin: 5px -15px 5px -15px;
-    display: inline;
-    height: 30px;
-    width: 30px;
+.main__section--activity--empire img {
+  height: 95%;
+  margin: -70px auto -70px auto;
+  width: 95%;
 }
 
