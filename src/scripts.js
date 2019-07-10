@@ -69,7 +69,6 @@ $(document).ready(function() {
 function getRandomNumber() {
   let randNum = (Math.random() * 50) + 1;
   randNum = Math.floor(randNum);
-  console.log(randNum);
   return randNum;
 }
 
