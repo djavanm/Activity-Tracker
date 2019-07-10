@@ -6,15 +6,9 @@ let currentHydration = new Hydration(hydrationData, currentUser.id);
 let currentSleep = new Sleep(sleepData, currentUser.id);
 let sleepRepo = new SleepRepository(sleepData)
 let today = setDateString();
-// console.log(currentSleep.returnWeekHours("2019/06/23"))
-// console.log(currentHydration);
 let activity = new Activity(activityData, getRandomNumber());
-let activityDay = activity.returnDay("2019/06/23");
+let activityDay = activity.returnDay(today);
 let activityRepo = new ActivityRepository(activityData)
-console.log(activity.returnIncreasedStairDays())
-console.log(activityRepo)
-
-// console.log(currentHydration);
 
 $(document).ready(function() {
 
@@ -43,7 +37,7 @@ $(document).ready(function() {
   $(".main__section--friends--challenge").html(friendsStepChallenge())
   $('.main__section--daily-intake').text(currentHydration.returnIntakeByDay(today))
   $('.main__section--average-intake').text(currentHydration.returnDailyAverage())
-  $('.main__section--hydration-canvas').text(currentHydration.returnWeekIntake())
+  $('.main__section--hydration-canvas').text(currentHydration.returnWeekIntake(today))
   $('.main__section--daily-sleep-hours').text(currentSleep.returnDayHours(today))
   $('.main__section--daily-sleep-quality').text(currentSleep.returnDayQual(today))
   $('.main__section--week-sleep-hours').text(currentSleep.returnWeekHours(today))
@@ -70,14 +64,9 @@ $(document).ready(function() {
   $('.main__section--sleep--worst span').first().text(currentSleep.returnWorstDay(today).date)
   $('.main__section--sleep--worst span').eq(1).text(currentSleep.returnWorstDay(today).sleepQuality)
   $('.main__section--hydration--today span').text(currentHydration.returnIntakeByDay(today))
-  $('.main__section--activity--trends span').eq(0).text(activity.returnIncreasedStepDays().pop().date)
-  $('.main__section--activity--trends span').eq(1).text(activity.returnIncreasedStairDays().pop().date)
-
-
+  $('.main__section--activity--trends span').eq(0).text(activity.returnIncreasedStepDays(today).pop().date)
+  $('.main__section--activity--trends span').eq(1).text(activity.returnIncreasedStairDays(today).pop().date)
 });
-
-
-
 
 function getRandomNumber() {
   let randNum = (Math.random() * 50) + 1;
@@ -85,8 +74,6 @@ function getRandomNumber() {
   console.log(randNum);
   return randNum;
 }
-
-
 function friendsStepChallenge() {
     let friends = currentUser.friends;
     friends.push(currentUser.id);
@@ -95,7 +82,7 @@ function friendsStepChallenge() {
     }).map(friend => {
         return friend = {
             'id': friend.id, 
-            'weeklySteps': friend.returnWeeklySteps("2019/06/23"),
+            'weeklySteps': friend.returnWeeklySteps(today),
             'name': globalRepo.returnUser(friend.id).name
         }
     })
@@ -138,16 +125,13 @@ function setDateString() {
     }
   }
 
-
-// friendsStepChallenge();
-
 // Chart  Section //
 
 Chart.defaults.global.defaultFontColor = 'white';
 Chart.defaults.global.defaultFontSize = 16;
 Chart.defaults.scale.ticks.beginAtZero = true;
 
-let hydrationWeekData = currentHydration.returnWeekIntake();
+let hydrationWeekData = currentHydration.returnWeekIntake(today);
 let hydrationDays = hydrationWeekData.reduce((acc, day) => {
     let today = day;
     let newDate = today.date.split('/').filter(index => index.length !== 4).join('/');
@@ -184,7 +168,7 @@ const chart = new Chart(ctx, {
 
 });
 
-let sleepWeek = currentSleep.returnWeekHours("2019/06/23");
+let sleepWeek = currentSleep.returnWeekHours(today);
 let sleepDays = sleepWeek.reduce((acc, day) => {
     let today = day;
     let newDate = today.date.split('/').filter(index => index.length !== 4).join('/');
@@ -221,75 +205,6 @@ const chart2 = new Chart(ctx2, {
 
 });
 
-
-// const ctx3 = $('#step-goal-chart')
-// const chart3 = new Chart(ctx3, {
-//     // The type of chart we want to create
-//     type: 'polarArea', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-//     // The data for our dataset
-//     data: {
-//         labels: [`My Step Goal`, `Average Step Goal`,],
-//         datasets: [{
-//             label: 'My Step Goals',
-//             backgroundColor: ['green', 'black'],
-//             borderColor: 'black',
-//             borderWidth: 2,
-//             data: [`${currentUser.dailyStepGoal}`, `${globalRepo.returnAvgStepGoal()}`]
-//         }]
-//     },
-
-//     // Configuration options go here
-//     options: {
-//         title: {
-//             display: true,
-//             text: 'My Step Goals'
-//         },
-//         legend: {
-//             display: false,
-//             position: 'bottom'
-//         }
-//     }
-
-// });
-
-
-// // const ctx4 = $('#step-goal-chart-two')
-// const chart4 = new Chart(ctx4, {
-//     // The type of chart we want to create
-//     type: 'doughnut', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-//     // The data for our dataset
-//     data: {
-//         labels: [`My Step Goal`, `Average Step Goal`,],
-//         datasets: [{
-//             label: 'My Step Goals',
-//             backgroundColor: ['green', 'black'],
-//             borderColor: 'black',
-//             borderWidth: 2,
-//             data: [`${currentUser.dailyStepGoal}`, `${globalRepo.returnAvgStepGoal()}`]
-//         }]
-//     },
-
-//     // Configuration options go here
-//     options: {
-//         title: {
-//             display: true,
-//             text: 'My Step Goals'
-//         },
-//         legend: {
-//             display: false
-//         }
-//     }
-
-// });
-// let sleepWeek = currentSleep.returnWeekHours("2019/06/23");
-// // console.log(sleepWeek);
-// let sleepDays = sleepWeek.reduce((acc, day) => {
-//     let today = day;
-//     let newDate = today.date.split('/').filter(index => index.length !== 4).join('/');
-//     acc.push(newDate);
-//     return acc;
-//   }, []);
-
 const ctx5 = $('#sleep-quality-chart')
 const chart5 = new Chart(ctx5, {
     // The type of chart we want to create
@@ -319,36 +234,7 @@ const chart5 = new Chart(ctx5, {
 
 });
 
-// const ctx6 = $('#all-time-sleep-quality-chart')
-// const chart6 = new Chart(ctx6, {
-//     // The type of chart we want to create
-//     type: 'doughnut', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-//     // The data for our dataset
-//     data: {
-//         labels: [`My Sleep Quality`, 'Average Sleep Quality'],
-//         datasets: [{
-//             label: 'Sleep Quality All Time',
-//             backgroundColor: ['yellow', 'blue'],
-//             borderColor: 'black',
-//             borderWidth: 1,
-//             data: [`${currentSleep.returnAllTimeAvgQual()}`, `${sleepRepo.returnAllSleepQual()}`]
-//         }
-//     ]
-//     },
-
-//     // Configuration options go here
-//     options: {
-//         title: {
-//             display: true,
-//             text: 'My Average Sleep Quality'
-//         },
-//         legend: {
-//             display: false
-//         }
-//     }
-// });
-
-let activityWeek = activity.returnWeekInfo();
+let activityWeek = activity.returnWeekInfo(today);
 let activityDays = activityWeek.reduce((acc, day) => {
   let today = day;
   let newDate = today.date.split('/').filter(index => index.length !== 4).join('/');
@@ -473,4 +359,3 @@ const chart9 = new Chart(ctx9, {
         }
     }
 });
-
