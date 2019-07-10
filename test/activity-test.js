@@ -20,7 +20,11 @@ let allDayGoals = testActivityUserData.reduce((acc, day) => {
     return acc;
 }, [])
 // console.log(allDayGoals);
-
+let thisDayIndex = weeklyActivityTestData.findIndex(day => day.date === '2019/06/23')
+let currentWeek = weeklyActivityTestData.slice(thisDayIndex-6, thisDayIndex+1);
+let result =  parseInt(currentWeek.reduce((acc, day) => {
+  return acc += day.numSteps;
+  }, 0))
 let activity1 = new Activity(activityTestData, 1);
 let totalFlights = activity1.data.reduce((acc, day) => {
         acc += day.flightsOfStairs
@@ -81,8 +85,12 @@ describe('Activity', function() {
     expect(activity.returnHighestStairClimb()).to.equal(36)
   });
 
-  it('should return how many times a user has climbed the empire state building (102 flors)', function() {
+  it('should return how many times a user has climbed the empire state building (102 floors)', function() {
     expect(activity.returnEmpireCount()).to.equal(1.3)
+  });
+
+  it.only('should return the number of steps for a specific week)', function() {
+    expect(activity.returnWeeklySteps('2019/06/23')).to.equal(72632)
   });
 
 });
