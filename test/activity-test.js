@@ -9,7 +9,6 @@ const testActivityUserData = activityTestData.filter(user => user.userID === 1);
 const userTestRepository = require("../data/users-test-data");
 const UserRepository = require("../src/user-repository");
 const userDataRepo = require("../data/users")
-// console.log(testActivityUserData)
 let userRepo = new UserRepository(userDataRepo);
 let stepGoal = userRepo.returnUser(1).dailyStepGoal;
 
@@ -19,7 +18,6 @@ let allDayGoals = testActivityUserData.reduce((acc, day) => {
     }
     return acc;
 }, [])
-// console.log(allDayGoals);
 let thisDayIndex = weeklyActivityTestData.findIndex(day => day.date === '2019/06/23')
 let currentWeek = weeklyActivityTestData.slice(thisDayIndex-6, thisDayIndex+1);
 let result =  parseInt(currentWeek.reduce((acc, day) => {
@@ -30,8 +28,6 @@ let totalFlights = activity1.data.reduce((acc, day) => {
         acc += day.flightsOfStairs
     return acc;
 },0)
-
-console.log(parseFloat((totalFlights / 102).toFixed(1)))
 
 var activity, userRepository;
 
@@ -89,7 +85,7 @@ describe('Activity', function() {
     expect(activity.returnEmpireCount()).to.equal(1.3)
   });
 
-  it.only('should return the number of steps for a specific week)', function() {
+  it('should return the number of steps for a specific week)', function() {
     expect(activity.returnWeeklySteps('2019/06/23')).to.equal(72632)
   });
 
