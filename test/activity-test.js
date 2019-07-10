@@ -9,7 +9,6 @@ const testActivityUserData = activityTestData.filter(user => user.userID === 1);
 const userTestRepository = require("../data/users-test-data");
 const UserRepository = require("../src/user-repository");
 const userDataRepo = require("../data/users")
-// console.log(testActivityUserData)
 let userRepo = new UserRepository(userDataRepo);
 let stepGoal = userRepo.returnUser(1).dailyStepGoal;
 
@@ -77,8 +76,12 @@ describe('Activity', function() {
     expect(activity.returnHighestStairClimb()).to.equal(36)
   });
 
-  it('should return how many times a user has climbed the empire state building (102 flors)', function() {
+  it('should return how many times a user has climbed the empire state building (102 floors)', function() {
     expect(activity.returnEmpireCount()).to.equal(1.3)
+  });
+
+  it('should return the number of steps for a specific week)', function() {
+    expect(activity.returnWeeklySteps('2019/06/23')).to.equal(72632)
   });
 
 });
