@@ -259,3 +259,11 @@ padding: 0.5em;
   width: 95%;
 }
 
+.main__section--activity--trends {
+  margin: 0 auto -5px auto;
+}
+
+.main__section--activity--trends p{
+  font-size: 14px;
+  margin: 0px auto 15px auto;
+}
