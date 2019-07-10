@@ -28,7 +28,7 @@ describe('Hydration', function() {
       });
 
       it('should return daily intake for a week', function() {
-        expect(hydration.returnWeekIntake()).to.deep.equal(weekHydrationTestData)
+        expect(hydration.returnWeekIntake('2019/06/23')).to.deep.equal(weekHydrationTestData)
       });
 
 });

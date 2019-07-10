@@ -81,7 +81,7 @@ describe('Activity', function() {
     expect(activity.returnHighestStairClimb()).to.equal(36)
   });
 
-  it.only('should return how many times a user has climbed the empire state building (102 flors)', function() {
+  it('should return how many times a user has climbed the empire state building (102 flors)', function() {
     expect(activity.returnEmpireCount()).to.equal(1.3)
   });
 
