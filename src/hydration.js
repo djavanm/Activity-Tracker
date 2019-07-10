@@ -16,8 +16,9 @@ class Hydration {
     return this.data.find(day => day.date === date).numOunces;
   };
 
-  returnWeekIntake() {
-    return this.data.filter(user => user.userID === this.id).slice(-7)
+  returnWeekIntake(date) {
+    let index = this.data.findIndex(day => day.date === date);
+    return this.data.slice(index-6, index+1)
   }
 };
 
