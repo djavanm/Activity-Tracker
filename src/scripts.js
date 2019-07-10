@@ -70,6 +70,8 @@ $(document).ready(function() {
   $('.main__section--sleep--worst span').first().text(currentSleep.returnWorstDay(today).date)
   $('.main__section--sleep--worst span').eq(1).text(currentSleep.returnWorstDay(today).sleepQuality)
   $('.main__section--hydration--today span').text(currentHydration.returnIntakeByDay(today))
+  $('.main__section--activity--trends span').eq(0).text(activity.returnIncreasedStepDays().pop().date)
+  $('.main__section--activity--trends span').eq(1).text(activity.returnIncreasedStairDays().pop().date)
 
 
 });
