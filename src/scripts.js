@@ -69,6 +69,8 @@ $(document).ready(function() {
   $('.main__section--sleep--worst span').first().text(currentSleep.returnWorstDay("2019/06/23").date)
   $('.main__section--sleep--worst span').eq(1).text(currentSleep.returnWorstDay("2019/06/23").sleepQuality)
   $('.main__section--hydration--today span').text(currentHydration.returnIntakeByDay("2019/06/23"))
+  $('.main__section--activity--trends span').eq(0).text(activity.returnIncreasedStepDays().pop().date)
+  $('.main__section--activity--trends span').eq(1).text(activity.returnIncreasedStairDays().pop().date)
 
 
 });
