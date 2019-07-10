@@ -99,6 +99,7 @@ function generateFriendsElements(users) {
   return friendsList;
 }
 
+
 function setDateString() {
   let date = Date().split(' ');
   let returnDate = [2, 0, 1, 9, '/', 0];
@@ -118,9 +119,9 @@ function setDateString() {
     returnDate.push(date[2]);
     return returnDate.join('');
   } else {
-    return '2019/09/21';
-    }
-  };
+    return '2019/09/21'
+  }
+}
 
 // Chart  Section //
 
@@ -158,13 +159,14 @@ const chart = new Chart(ctx, {
           display: false
         }
     }
+  }
 
 });
 
 let sleepWeek = currentSleep.returnWeekHours(today);
 let sleepDays = sleepWeek.reduce((acc, day) => {
   let today = day;
-  let newDate = today.date.split('/').filter(index => index.length !== 4).join('/');
+  let newDate = today.date.split('/').filter(index => index.length !== 4).join('/')
     acc.push(newDate);
     return acc;
   }, []);
@@ -172,6 +174,9 @@ let sleepDays = sleepWeek.reduce((acc, day) => {
 const ctx2 = $('#sleep-hours-chart')
 const chart2 = new Chart(ctx2, {
   type: 'horizontalBar',
+  acc.push(newDate);
+  return acc;
+}, []);
   data: {
     labels: [`${sleepDays[0]}`, `${sleepDays[1]}`, `${sleepDays[2]}`, `${sleepDays[3]}`, `${sleepDays[4]}`, `${sleepDays[5]}`, `${sleepDays[6]}`],
     datasets: [{
@@ -258,10 +263,11 @@ const chart7 = new Chart(ctx7, {
         display: false
       }
     }
+  }
 });
 
 const ctx8 = $('#activity-stairs-chart');
-const chart8 = new Chart(ctx8, {
+const chart8 = new Chart(ctx8, 
   type: 'line',
   data: {
     labels: [`${activityDays[0]}`, `${activityDays[1]}`, `${activityDays[2]}`, `${activityDays[3]}`, `${activityDays[4]}`, `${activityDays[5]}`, `${activityDays[6]}`],
@@ -281,7 +287,7 @@ const chart8 = new Chart(ctx8, {
         maxBarThickness: 8,
         minBarLength: 20,
         gridLines: {
-            offsetGridLines: true
+          offsetGridLines: true
         }
       }]
     },
@@ -316,7 +322,7 @@ const chart9 = new Chart(ctx9, {
         maxBarThickness: 8,
         minBarLength: 20,
         gridLines: {
-            offsetGridLines: true
+          offsetGridLines: true
         }
       }]
     },

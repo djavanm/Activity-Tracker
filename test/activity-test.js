@@ -9,25 +9,21 @@ const testActivityUserData = activityTestData.filter(user => user.userID === 1);
 const userTestRepository = require("../data/users-test-data");
 const UserRepository = require("../src/user-repository");
 const userDataRepo = require("../data/users")
-// console.log(testActivityUserData)
 let userRepo = new UserRepository(userDataRepo);
 let stepGoal = userRepo.returnUser(1).dailyStepGoal;
 
 let allDayGoals = testActivityUserData.reduce((acc, day) => {
-    if(day.numSteps >= stepGoal) {
-        acc.push(day)
-    }
-    return acc;
+  if (day.numSteps >= stepGoal) {
+    acc.push(day)
+  }
+  return acc;
 }, [])
-// console.log(allDayGoals);
 
 let activity1 = new Activity(activityTestData, 1);
 let totalFlights = activity1.data.reduce((acc, day) => {
-        acc += day.flightsOfStairs
-    return acc;
-},0)
-
-console.log(parseFloat((totalFlights / 102).toFixed(1)))
+  acc += day.flightsOfStairs
+  return acc;
+}, 0)
 
 var activity, userRepository;
 
@@ -36,7 +32,6 @@ describe('Activity', function() {
   beforeEach(function() {
     activity = new Activity(activityTestData, 1);
     userRepository = new UserRepository(userDataRepo);
-    // console.log(activity)
   });
 
   it('should be a function', function() {
@@ -49,12 +44,12 @@ describe('Activity', function() {
 
   it('should return user data for a given day', function() {
     expect(activity.returnDay('2019/06/23')).to.deep.equal( {
-        userID: 1,
-        date: '2019/06/23',
-        numSteps: 13928,
-        minutesActive: 218,
-        flightsOfStairs: 21
-      })
+      userID: 1,
+      date: '2019/06/23',
+      numSteps: 13928,
+      minutesActive: 218,
+      flightsOfStairs: 21
+    })
   });
 
   it('should return the miles a user has walked in a day, based on their steps and stride length', function() {
