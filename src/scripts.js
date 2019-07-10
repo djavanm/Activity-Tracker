@@ -5,6 +5,7 @@ let currentUser = new User(globalRepo.returnUser(getRandomNumber()));
 let currentHydration = new Hydration(hydrationData, currentUser.id);
 let currentSleep = new Sleep(sleepData, currentUser.id);
 let sleepRepo = new SleepRepository(sleepData)
+let today = setDateString();
 // console.log(currentSleep.returnWeekHours("2019/06/23"))
 // console.log(currentHydration);
 let activity = new Activity(activityData, getRandomNumber());
@@ -40,35 +41,35 @@ $(document).ready(function() {
   $(".user-steps").text(currentUser.dailyStepGoal)
   $(".user-email").eq(0).text(currentUser.email)
   $(".main__section--friends--challenge").html(friendsStepChallenge())
-  $('.main__section--daily-intake').text(currentHydration.returnIntakeByDay("2019/06/23"))
+  $('.main__section--daily-intake').text(currentHydration.returnIntakeByDay(today))
   $('.main__section--average-intake').text(currentHydration.returnDailyAverage())
   $('.main__section--hydration-canvas').text(currentHydration.returnWeekIntake())
-  $('.main__section--daily-sleep-hours').text(currentSleep.returnDayHours("2019/06/23"))
-  $('.main__section--daily-sleep-quality').text(currentSleep.returnDayQual("2019/06/23"))
-  $('.main__section--week-sleep-hours').text(currentSleep.returnWeekHours("2019/06/23"))
-  $('.main__section--week-sleep-quality').text(currentSleep.returnWeekHours("2019/06/23"))
+  $('.main__section--daily-sleep-hours').text(currentSleep.returnDayHours(today))
+  $('.main__section--daily-sleep-quality').text(currentSleep.returnDayQual(today))
+  $('.main__section--week-sleep-hours').text(currentSleep.returnWeekHours(today))
+  $('.main__section--week-sleep-quality').text(currentSleep.returnWeekHours(today))
   $('.main__section--average-sleep-hours').text(currentSleep.returnAllTimeAvgHours())
   $('.main__section--average-sleep-quality').text(currentSleep.returnAllTimeAvgQual())
   $('.main__section--activity--steps span').text(activityDay.numSteps.toLocaleString())
-  $('.main__section--activity--miles span').text(activity.returnDailyMiles("2019/06/23"))
+  $('.main__section--activity--miles span').text(activity.returnDailyMiles(today))
   $('.main__section--activity--minutes span').text(activityDay.minutesActive)
   $('.main__section--activity--flights span').text(activityDay.flightsOfStairs)
   $('.main__section--activity--empire span').text(activity.returnEmpireCount())
-  $('.main__section--sleep--last-night span').first().text(currentSleep.returnDayHours("2019/06/23"))
-  $('.main__section--sleep--last-night span').eq(1).text(currentSleep.returnDayQual("2019/06/23"))
+  $('.main__section--sleep--last-night span').first().text(currentSleep.returnDayHours(today))
+  $('.main__section--sleep--last-night span').eq(1).text(currentSleep.returnDayQual(today))
   $('.main__section--sleep--averages span').first().text(currentSleep.returnAllTimeAvgHours())
   $('.main__section--sleep--averages span').eq(1).text(currentSleep.returnAllTimeAvgQual())
   $('.main__section--activity--world table tr td').eq(1).text(activityDay.numSteps.toLocaleString())
-  $('.main__section--activity--world table tr td').eq(2).text(activityRepo.returnAvgSteps("2019/06/23").toLocaleString())
+  $('.main__section--activity--world table tr td').eq(2).text(activityRepo.returnAvgSteps(today).toLocaleString())
   $('.main__section--activity--world table tr td').eq(4).text(currentUser.dailyStepGoal)
   $('.main__section--activity--world table tr td').eq(5).text(globalRepo.returnAvgStepGoal())
   $('.main__section--activity--world table tr td').eq(7).text(activityDay.minutesActive)
-  $('.main__section--activity--world table tr td').eq(8).text(activityRepo.returnAvgMins("2019/06/23"))
+  $('.main__section--activity--world table tr td').eq(8).text(activityRepo.returnAvgMins(today))
   $('.main__section--activity--world table tr td').eq(10).text(activityDay.flightsOfStairs)
-  $('.main__section--activity--world table tr td').eq(11).text(activityRepo.returnAvgStairs("2019/06/23"))
-  $('.main__section--sleep--worst span').first().text(currentSleep.returnWorstDay("2019/06/23").date)
-  $('.main__section--sleep--worst span').eq(1).text(currentSleep.returnWorstDay("2019/06/23").sleepQuality)
-  $('.main__section--hydration--today span').text(currentHydration.returnIntakeByDay("2019/06/23"))
+  $('.main__section--activity--world table tr td').eq(11).text(activityRepo.returnAvgStairs(today))
+  $('.main__section--sleep--worst span').first().text(currentSleep.returnWorstDay(today).date)
+  $('.main__section--sleep--worst span').eq(1).text(currentSleep.returnWorstDay(today).sleepQuality)
+  $('.main__section--hydration--today span').text(currentHydration.returnIntakeByDay(today))
   $('.main__section--activity--trends span').eq(0).text(activity.returnIncreasedStepDays().pop().date)
   $('.main__section--activity--trends span').eq(1).text(activity.returnIncreasedStairDays().pop().date)
 
@@ -112,7 +113,30 @@ function generateFriendsElements(users) {
     friendsList += '</ol>'
     console.log(friendsList)
     return friendsList
-}
+};
+
+function setDateString() {
+  let date = Date().split(' ')
+  let returnDate = [2,0,1,9,'/',0];
+  if(date[1] === 'Jul') {
+    returnDate.push(7);
+    returnDate.push('/');
+    returnDate.push(date[2]);
+    return returnDate.join('');
+  } else if(date[1] === 'Aug') {
+    returnDate.push(8)
+    returnDate.push('/');
+    returnDate.push(date[2]);
+    return returnDate.join('');
+  } else if(date[1] === 'Sep') {
+    returnDate.push(9)
+    returnDate.push('/');
+    returnDate.push(date[2]);
+    return returnDate.join('');
+  } else {
+    return '2019/09/21'
+    }
+  }
 
 
 // friendsStepChallenge();
