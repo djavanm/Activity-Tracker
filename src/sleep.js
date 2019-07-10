@@ -2,20 +2,20 @@ class Sleep {
   constructor(data, id) {
     this.data = data.filter(user => user.userID === id);
     this.id = id;
-    }
+  }
 
   returnAllTimeAvgHours() {
-  const avgHours = this.data.reduce((acc, day) => {
+    const avgHours = this.data.reduce((acc, day) => {
       return acc += day.hoursSlept;
-  }, 0) / this.data.length;
-  return avgHours.toFixed(1)
+    }, 0) / this.data.length;
+    return avgHours.toFixed(1)
   }
 
   returnAllTimeAvgQual() {
     const avgQual = this.data.reduce((acc, day) => {
       return acc += day.sleepQuality;
-  }, 0) / this.data.length;
-  return avgQual.toFixed(1);
+    }, 0) / this.data.length;
+    return avgQual.toFixed(1);
   }
 
   returnDayHours(date) {
@@ -45,6 +45,6 @@ class Sleep {
 
 
 if (typeof module !== 'undefined') {
-    module.exports = Sleep;
+  module.exports = Sleep;
 }
 
