@@ -10,6 +10,4 @@ The main objectives of this project include:
 * Write and implement a robust testing suite using TDD
 * Manipulate data using object and array prototype methods. 
 
-##
-
 ![screenshot](https://i.imgur.com/LyrCadJ.png)
